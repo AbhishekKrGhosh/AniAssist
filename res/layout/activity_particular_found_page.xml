@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundimage2"
+    android:padding="20dp"
+    tools:context=".ParticularFoundPage">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/categorytvFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:text="Category" />
+
+
+            <ImageView
+                android:id="@+id/FoundImg"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/dog"/>
+
+            <TextView
+                android:id="@+id/descriptionFoundtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="italic"
+                android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/contactInfotvFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="#393939"
+                android:layout_marginBottom="10dp"
+                android:text="ContactInfo" />
+
+
+            <Button
+                android:id="@+id/foundButton"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Returned Home" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

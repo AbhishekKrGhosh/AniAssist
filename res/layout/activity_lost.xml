@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundimage"
+    android:padding="20dp"
+    tools:context=".Lost">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Have you lost your beloved friend?"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Utilize this app to reunite with them."
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/categorylost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:inputType="text"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:hint="Animal Category" />
+        <EditText
+            android:id="@+id/namelost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:inputType="text"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:hint="Animal Name" />
+        <EditText
+            android:id="@+id/ownerlost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:inputType="text"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:hint="Owner Name" />
+        <EditText
+            android:id="@+id/ownernumberlost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:inputType="text"
+            android:hint="Owner Number" />
+        <EditText
+            android:id="@+id/descriptionlost"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:inputType="textMultiLine"
+            android:hint="Description" />
+        <EditText
+            android:id="@+id/lastlocationlost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:inputType="text"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:hint="Last Sighted" />
+
+
+        <Button
+            android:id="@+id/picturelost"
+            android:layout_width="100dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="Picture" />
+            <ImageView
+                android:id="@+id/pictureinfolost"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/dimg"/>
+
+
+        <Button
+            android:id="@+id/buttonLost"
+            android:layout_width="100dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Post" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:text=""/>
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

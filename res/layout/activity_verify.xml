@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/backgroundimage"
+    android:padding="20dp"
+    tools:context=".Verify">
+
+    <TextView
+        android:id="@+id/proof"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:text="Proof" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F44336"
+        android:text="* image is mandatory" />
+
+    <Button
+        android:id="@+id/imageproof"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Image" />
+
+    <ImageView
+        android:id="@+id/proofImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/dimg"/>
+
+    <EditText
+        android:id="@+id/descriptionet"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="10dp"
+        android:textColorHint="@color/my_light_text_secondary"
+        android:padding="8dp"
+        android:inputType="textMultiLine"
+        android:hint="description" />
+
+    <Button
+        android:id="@+id/proofsubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:text="Submit" />
+</LinearLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundimage"
+    tools:context=".Found">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/foundList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00BF63"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="Found List" />
+
+        <Button
+            android:id="@+id/foundNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00BF63"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="Found New" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/foundListLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFound"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarFound"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+        <TextView
+            android:id="@+id/foundtv"
+            android:visibility="gone"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/foundNewLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+    <LinearLayout
+        android:id="@+id/foundLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="20sp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="An animal has been found"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="that appears to be lost and away from its home."
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="Help guide it back to its rightful place."
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/categoryFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:inputType="text"
+            android:hint="Animal Category" />
+        <Button
+            android:id="@+id/picture"
+            android:layout_width="120dp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:text="picture" />
+        <ImageView
+            android:id="@+id/pictureinfofound"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/dimg"/>
+        <EditText
+            android:id="@+id/descriptionFound"
+            android:layout_width="match_parent"
+            android:layout_height="150sp"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:layout_marginBottom="10dp"
+            android:inputType="textMultiLine"
+            android:hint="Description" />
+        <EditText
+            android:id="@+id/contactInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:background="@drawable/edittext_border"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/my_light_text_secondary"
+            android:layout_marginBottom="10dp"
+            android:inputType="text"
+            android:hint="Contact me" />
+        <Button
+            android:id="@+id/postButton"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:text=""/>
+    </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>
