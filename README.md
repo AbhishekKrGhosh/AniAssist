@@ -2,6 +2,11 @@
 
 AniAssist is a compassionate Android application designed to assist animals in need. It aims to facilitate animal rescue, lost pet recovery, and reuniting lost animals with their homes.
 
+
+![Picsart_24-08-11_16-49-01-691](https://github.com/user-attachments/assets/5cdb7b15-d4a6-4c4b-9a40-4d449bc7f6ec)
+
+
+
 ## Features
 
 - **Firebase Integration:**
