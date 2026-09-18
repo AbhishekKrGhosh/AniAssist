@@ -5,6 +5,8 @@ animals, lost pets, and found animals, and let nearby people respond.
 
 📱 [AniAssist on Google Play](https://play.google.com/store/apps/details?id=abhishek.aniassist)
 
+<img width="1942" height="809" alt="githubreadme" src="https://github.com/user-attachments/assets/3e1944c2-4396-41ca-b9db-36ab3b6f40a9" />
+
 ---
 
 ## What the app does
