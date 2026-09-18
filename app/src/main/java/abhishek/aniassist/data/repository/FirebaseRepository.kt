@@ -73,6 +73,46 @@ object FirebaseRepository {
         snap.getValue(String::class.java) ?: ""
     }.getOrDefault("")
 
+    /** Safety concern report — stored under SafetyReports/{id} for console review */
+    suspend fun submitSafetyReport(
+        reporterEmail: String, concernType: String, details: String
+    ): Result<Unit> = runCatching {
+        val report = mapOf(
+            "reporter" to reporterEmail,
+            "type" to concernType,
+            "details" to details,
+            "timestamp" to System.currentTimeMillis()
+        )
+        db.child("SafetyReports").child(generateId()).setValue(report).await()
+    }
+
+    // ─── Account deletion (Play requires in-app delete for account apps) ──────
+
+    /**
+     * Deletes everything tied to the account:
+     * Users/{email} (name, avatar ref, proofs) + Images/Profile/{email}_* blobs,
+     * then the Firebase Auth account itself.
+     * Fails with "recent authentication required" if the session is old —
+     * caller should ask the user to re-login and retry.
+     */
+    suspend fun deleteAccount(email: String): Result<Unit> = runCatching {
+        val sanitized = sanitizeEmail(email)
+
+        // Remove profile image blobs under Images/Profile/{sanitized}_*
+        runCatching {
+            val snap = db.child("Images").child("Profile").get().await()
+            snap.children
+                .filter { it.key?.startsWith(sanitized) == true }
+                .forEach { it.ref.removeValue().await() }
+        }
+
+        // Remove user record (name / avatar ref / proof submissions)
+        runCatching { db.child("Users").child(sanitized).removeValue().await() }
+
+        // Remove the auth account — throws if it needs recent login
+        auth.currentUser?.delete()?.await()
+    }
+
     // ─── Realtime Feeds ───────────────────────────────────────────────────────
 
     fun getLostAnimals(city: String): Flow<List<AnimalLostInfo>> = callbackFlow {

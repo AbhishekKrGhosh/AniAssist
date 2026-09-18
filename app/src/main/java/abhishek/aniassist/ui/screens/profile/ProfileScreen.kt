@@ -1,5 +1,6 @@
 package abhishek.aniassist.ui.screens.profile
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -26,12 +27,15 @@ import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.AddPhotoAlternate
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DeleteForever
 import androidx.compose.material.icons.filled.EditLocation
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.PhotoCamera
+import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -83,6 +87,16 @@ fun ProfileScreen(navController: NavHostController, appViewModel: AppViewModel) 
     var showNameEditor by remember { mutableStateOf(false) }
     var isAvatarUploading by remember { mutableStateOf(false) }
     var showAvatarOptions by remember { mutableStateOf(false) }
+    var showSafety by remember { mutableStateOf(false) }
+    var safetyType by remember { mutableStateOf("Child safety / CSAE / CSAM concerns") }
+    var safetyDetails by remember { mutableStateOf("") }
+    var safetyMsg by remember { mutableStateOf("") }
+    var safetyIsError by remember { mutableStateOf(false) }
+    var isSafetySubmitting by remember { mutableStateOf(false) }
+    var safetySubmitted by remember { mutableStateOf(false) }
+    var showDeleteConfirm by remember { mutableStateOf(false) }
+    var isDeleting by remember { mutableStateOf(false) }
+    var deleteError by remember { mutableStateOf("") }
 
     fun uploadAvatar(uri: Uri) {
         isAvatarUploading = true
@@ -442,6 +456,186 @@ fun ProfileScreen(navController: NavHostController, appViewModel: AppViewModel) 
 
                     HorizontalDivider(color = Color(0xFFF0EBE0), thickness = 1.dp)
                     ProfileMenuItem(
+                        icon = Icons.Default.Shield,
+                        title = "Help & Safety",
+                        subtitle = "Report a Safety Concern",
+                        expanded = showSafety,
+                        onClick = { showSafety = !showSafety }
+                    )
+
+                    if (showSafety) {
+                        if (safetySubmitted) {
+                            // ── Thank-you state replaces the form ────────────
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp)
+                                    .padding(bottom = 20.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(52.dp)
+                                        .clip(CircleShape)
+                                        .background(Forest.copy(alpha = 0.12f)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        Icons.Default.Shield, null,
+                                        tint = Forest, modifier = Modifier.size(26.dp)
+                                    )
+                                }
+                                Spacer(Modifier.height(10.dp))
+                                Text(
+                                    "Thank you for speaking up",
+                                    fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Ink
+                                )
+                                Spacer(Modifier.height(4.dp))
+                                Text(
+                                    "Your report was submitted successfully. " +
+                                        "Our safety team will review it and take " +
+                                        "appropriate action.",
+                                    fontSize = 12.sp, color = Sage, lineHeight = 17.sp,
+                                    textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                                )
+                                Spacer(Modifier.height(12.dp))
+                                TextButton(
+                                    onClick = { showSafety = false; safetySubmitted = false }
+                                ) { Text("Done", color = Forest, fontWeight = FontWeight.Bold) }
+                            }
+                        } else {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .padding(bottom = 16.dp)
+                        ) {
+                            Text(
+                                "Report a Safety Concern",
+                                fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Ink
+                            )
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                "If you have a concern about child safety, inappropriate content, " +
+                                    "user behavior, or any other safety issue on AniAssist, " +
+                                    "please contact our safety team.",
+                                fontSize = 12.sp, color = Sage, lineHeight = 17.sp
+                            )
+                            Spacer(Modifier.height(10.dp))
+
+                            // Concern type chips
+                            listOf(
+                                "Child safety / CSAE / CSAM concerns",
+                                "Inappropriate content",
+                                "User behavior",
+                                "Other safety concerns"
+                            ).forEach { item ->
+                                val selected = safetyType == item
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 3.dp)
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .background(
+                                            if (selected) Forest.copy(alpha = 0.12f) else Color.Transparent
+                                        )
+                                        .clickable { safetyType = item; safetyMsg = "" }
+                                        .padding(horizontal = 8.dp, vertical = 8.dp)
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(14.dp)
+                                            .clip(CircleShape)
+                                            .background(
+                                                if (selected) Forest else Color(0xFFD8D2C4)
+                                            )
+                                    )
+                                    Spacer(Modifier.width(10.dp))
+                                    Text(
+                                        item, fontSize = 13.sp,
+                                        color = if (selected) Forest else Ink,
+                                        fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal
+                                    )
+                                }
+                            }
+
+                            Spacer(Modifier.height(10.dp))
+                            OutlinedTextField(
+                                value = safetyDetails,
+                                onValueChange = { safetyDetails = it; safetyMsg = "" },
+                                placeholder = { Text("Describe your concern…", color = Sage, fontSize = 13.sp) },
+                                modifier = Modifier.fillMaxWidth().height(100.dp),
+                                shape = RoundedCornerShape(12.dp),
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    focusedContainerColor = Cream,
+                                    unfocusedContainerColor = Cream,
+                                    focusedBorderColor = Forest,
+                                    unfocusedBorderColor = Color(0xFFE3DDD0)
+                                )
+                            )
+                            if (safetyMsg.isNotEmpty()) {
+                                Spacer(Modifier.height(6.dp))
+                                Text(
+                                    safetyMsg,
+                                    color = if (safetyIsError) MaterialTheme.colorScheme.error else Forest,
+                                    fontSize = 12.sp
+                                )
+                            }
+                            Spacer(Modifier.height(10.dp))
+
+                            Button(
+                                onClick = {
+                                    if (safetyDetails.isBlank()) {
+                                        safetyIsError = true
+                                        safetyMsg = "Please describe your concern"
+                                        return@Button
+                                    }
+                                    isSafetySubmitting = true
+                                    scope.launch {
+                                        FirebaseRepository.submitSafetyReport(
+                                            email, safetyType, safetyDetails.trim()
+                                        ).onSuccess {
+                                            isSafetySubmitting = false
+                                            safetyIsError = false
+                                            safetyMsg = ""
+                                            safetyDetails = ""
+                                            safetySubmitted = true
+                                        }.onFailure {
+                                            isSafetySubmitting = false
+                                            safetyIsError = true
+                                            safetyMsg = "Couldn't submit. Check your connection and try again."
+                                        }
+                                    }
+                                },
+                                modifier = Modifier.fillMaxWidth().height(46.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = Forest),
+                                shape = RoundedCornerShape(12.dp),
+                                enabled = !isSafetySubmitting
+                            ) {
+                                if (isSafetySubmitting) {
+                                    CircularProgressIndicator(color = Color.White, modifier = Modifier.size(18.dp))
+                                } else {
+                                    Icon(Icons.Default.Shield, null, modifier = Modifier.size(16.dp))
+                                    Spacer(Modifier.width(8.dp))
+                                    Text("Submit Safety Report", fontWeight = FontWeight.Bold)
+                                }
+                            }
+                        }
+                        }
+                    }
+
+                    HorizontalDivider(color = Color(0xFFF0EBE0), thickness = 1.dp)
+                    ProfileMenuItem(
+                        icon = Icons.Default.DeleteForever,
+                        title = "Delete Account",
+                        subtitle = "Permanently remove your account and data",
+                        titleColor = Coral,
+                        onClick = { showDeleteConfirm = true; deleteError = "" }
+                    )
+
+                    HorizontalDivider(color = Color(0xFFF0EBE0), thickness = 1.dp)
+                    ProfileMenuItem(
                         icon = Icons.AutoMirrored.Filled.Logout,
                         title = "Logout",
                         subtitle = "Sign out of AniAssist",
@@ -580,6 +774,61 @@ fun ProfileScreen(navController: NavHostController, appViewModel: AppViewModel) 
                 }
             }
         }
+    }
+
+    // Account deletion — Play requires an in-app delete path
+    if (showDeleteConfirm) {
+        AlertDialog(
+            onDismissRequest = { if (!isDeleting) showDeleteConfirm = false },
+            containerColor = Color.White,
+            title = { Text("Delete Account?", fontWeight = FontWeight.Bold, color = Ink) },
+            text = {
+                Column {
+                    Text(
+                        "This permanently deletes your AniAssist account, profile " +
+                            "data, and photo. This can't be undone.",
+                        fontSize = 13.sp, color = Sage, lineHeight = 18.sp
+                    )
+                    if (deleteError.isNotEmpty()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(deleteError, color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
+                    }
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        isDeleting = true
+                        scope.launch {
+                            FirebaseRepository.deleteAccount(email)
+                                .onSuccess {
+                                    appViewModel.clearSession()
+                                    navController.navigate(Screen.LOGIN) {
+                                        popUpTo(0) { inclusive = true }
+                                    }
+                                }
+                                .onFailure {
+                                    isDeleting = false
+                                    deleteError =
+                                        "For security, please logout, log back in, and try again."
+                                }
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Coral),
+                    shape = RoundedCornerShape(12.dp),
+                    enabled = !isDeleting
+                ) {
+                    if (isDeleting) CircularProgressIndicator(color = Color.White, modifier = Modifier.size(18.dp))
+                    else Text("Delete", fontWeight = FontWeight.Bold)
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showDeleteConfirm = false },
+                    enabled = !isDeleting
+                ) { Text("Cancel", color = Sage) }
+            }
+        )
     }
 }
 

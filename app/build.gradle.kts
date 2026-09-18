@@ -29,8 +29,8 @@ android {
         targetSdk = 37
         // IMPORTANT: versionCode must be HIGHER than your last published version.
         // Check your old Play Store listing and set this accordingly.
-        versionCode = 8
-        versionName = "1.8"
+        versionCode = 9
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
