@@ -6,7 +6,11 @@ AniAssist is a community-driven Android app designed to help people report injur
 
 Built as an end-to-end Android project using Kotlin and Jetpack Compose, AniAssist covers UI development, application architecture, Firebase integration, location services, camera workflows, image processing, account management, safety features, and Google Play deployment.
 
-<h2 align="center"><img src="https://cdn.simpleicons.org/googleplay/34A853" width="24"> <a href="https://play.google.com/store/apps/details?id=abhishek.aniassist">Live on Google Play</a></h2>
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=abhishek.aniassist">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" width="180" alt="Get it on Google Play" />
+  </a>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Kotlin-Android-7F52FF?style=for-the-badge&logo=kotlin" />
