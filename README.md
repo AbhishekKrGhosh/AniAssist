@@ -282,10 +282,6 @@ Configure the required Firebase and Google Maps credentials before running the a
 
 ---
 
-_Shared publicly for portfolio and technical review. Not open source — please don't reuse or republish without permission._
-
----
-
 # 👨‍💻 Author
 
 ## Abhishek Kumar
