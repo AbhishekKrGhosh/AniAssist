@@ -1,105 +1,87 @@
 # AniAssist
 
-An Android app for reporting and helping animals in need — injured animals, lost pets, and found animals — organized by city, with community verification and an animal-knowledge trivia section.
+A community-driven Android app for helping animals in need — report injured
+animals, lost pets, and found animals, and let nearby people respond.
 
-Published on Google Play: https://play.google.com/store/apps/details?id=abhishek.aniassist
+📱 [AniAssist on Google Play](https://play.google.com/store/apps/details?id=abhishek.aniassist)
 
-## Features
+---
 
-- **Report Injured Animal** — photo (camera/gallery), problem, animal type, condition, exact map location
-- **Report Lost / Found Pet** — same flow, tuned for lost and found animals
-- **Verify sightings** — community proof submission for reported cases
-- **Nearby cases feed** — city-based feed with filters, search, and embedded maps + "Navigate to location"
-- **Profile** — avatar (selfie/gallery with crop), name/city editing, Help & Safety reporting, account deletion
-- **Animal Kingdom trivia** — Air / Land / Water animals with facts and breeds
-- **Auth** — email/password sign-up, login, forgot password
+## What the app does
 
-## Tech Stack
+### Report an animal in need
 
-- **Kotlin + Jetpack Compose** (Material 3), single-activity navigation
-- **Firebase Auth** — email/password accounts
-- **Firebase Realtime Database** — all data + base64 image storage (no Storage/billing needed)
-- **Google Maps Compose + CameraX + Coil + Lottie**
-- **uCrop** for avatar cropping, **Photo Picker** for gallery images
+- **Injured animals** — snap a photo in-app (or pick from gallery), describe the
+  problem, pick the animal type and condition, and pin the exact spot on a map
+- **Lost & found pets** — the same guided flow tuned for lost and found cases
+- **Community verification** — other users can submit proof/sightings for a
+  reported case
 
-## Setup
+### Discover cases nearby
 
-This repo intentionally excludes secrets. To build, create the following:
+- **City-based feed** — reports are grouped by city with Injured / Lost / Found
+  filters and text search
+- **Detail pages** — photo hero, status badges, and every piece of info in
+  clearly styled cards
+- **Embedded map + one-tap navigation** — jump straight into Google Maps
+  directions to the reported location
 
-### 1. `google-services.json`
+### Learn & play
 
-Place your Firebase config file at `app/google-services.json`
-(Firebase Console → Project settings → Your apps).
+- **Animal Kingdom trivia** — Air / Land / Water categories with facts, habitat,
+  diet, lifespan, and breed details
+- **Easter eggs** — shake-to-discover, a wandering dog animation, a dog-bark
+  sound bite on the profile page
 
-### 2. `.env` in the project root
+### Account & safety
 
-```env
-# Google Maps API key
-MAPS_API_KEY=your_maps_api_key
+- Email/password auth with forgot-password flow
+- Profile photo via front-camera selfie or gallery, with circular crop
+- **Help & Safety** — in-app child-safety concern reporting (Google Play child
+  safety standards compliant)
+- **In-app account deletion** — removes profile data and auth account
+  (Play account-deletion policy compliant)
 
-# Firebase Realtime Database URL
-FIREBASE_DB_URL=https://<project>-default-rtdb.firebaseio.com
+---
 
-# Release signing (only needed for release builds)
-KEYSTORE_PASSWORD=your_keystore_password
-KEY_ALIAS=your_key_alias
-KEY_PASSWORD=your_key_password
-```
+## Technical overview
 
-### 3. Signing keystore (release builds only)
+- **Kotlin + Jetpack Compose** — single-activity, Compose Navigation,
+  Material 3 design system with a custom illustrated visual language
+- **Firebase Auth** — email/password session management
+- **Firebase Realtime Database** — feeds, user profiles, proofs, and safety
+  reports; security rules scoped to authenticated users
+- **Images stored as base64 in RTDB** — a deliberate billing-free alternative
+  to Firebase Storage, with client-side downscaling (≤1024px reports / ≤512px
+  avatars) + JPEG compression before upload
+- **Google Maps Compose + Geocoder** — auto city detection, map pin picker,
+  reverse-geocoded addresses, `google.navigation` intents
+- **CameraX** — in-app capture with front/back lens selection per context
+  (selfie for avatars, rear camera for reports)
+- **Coil 3** — image loading with crossfade; placeholders + fade-in for
+  base64-decoded images
+- **uCrop** — avatar cropping via Activity Result contracts
+- **Lottie** — lightweight ambient animations
+- **R8/ProGuard** — release builds minified with keep rules for Firebase model
+  deserialization
+- **Secrets handled correctly** — API keys, DB URL, and signing credentials
+  injected via `.env` → `BuildConfig`/manifest placeholders; nothing sensitive
+  is committed
 
-Place your upload keystore at `app/aniassist-upload.jks` (or update the path in
-`app/build.gradle.kts` → `signingConfigs`).
-
-## Build
-
-```bash
-./gradlew assembleDebug     # debug APK  → app/build/outputs/apk/debug/app-debug.apk
-./gradlew assembleRelease   # release APK → app/build/outputs/apk/release/app-release.apk
-./gradlew bundleRelease     # release AAB → app/build/outputs/bundle/release/app-release.aab
-```
-
-## Firebase Database Structure
-
-```
-Users/{sanitizedEmail}/           → name, avatar ref, Proof submissions
-Location/{city}/Post|Lost|Found/  → animal reports per city
-Images/...                        → base64 image blobs (compressed ≤1024px)
-SafetyReports/{id}                → in-app safety concern reports
-```
-
-Required Realtime Database rules:
-
-```json
-{
-  "rules": {
-    "Users":         { ".read": "auth != null", ".write": "auth != null" },
-    "Location":      { ".read": "auth != null", ".write": "auth != null" },
-    "Images":        { ".read": "auth != null", ".write": "auth != null" },
-    "SafetyReports": { ".read": false,          ".write": "auth != null" }
-  }
-}
-```
-
-## Project Structure
+### Architecture
 
 ```
-app/src/main/java/abhishek/aniassist/
-├── data/            # models, repository, prefs, trivia data
-├── navigation/      # Screen routes + NavHost
-├── sensor/          # shake detector
-├── ui/
-│   ├── components/  # shared form/detail/image components
-│   ├── screens/     # auth, home, post/lost/found, verify,
-│   │                # profile, trivia, location, camera
-│   └── theme/       # colors, typography
-└── viewmodel/       # AppViewModel
+data/        models, FirebaseRepository, DataStore prefs, trivia data
+navigation/  Screen routes + NavHost
+ui/components/  shared detail scaffold, form components, image loader
+ui/screens/     auth, home feed, post/lost/found, verify, profile,
+                trivia, location picker, camera capture, onboarding
+viewmodel/      AppViewModel — session + cross-screen state
 ```
+
+---
 
 ## Notes
 
-- `versionCode`/`versionName` in `app/build.gradle.kts` must be bumped for each release.
-- The Maps API key should be restricted in Google Cloud Console by package name
-  `abhishek.aniassist` + the SHA-1 fingerprints of your debug and release certs.
-- Image uploads are downscaled and JPEG-compressed before being stored as base64
-  in the Realtime Database.
+Source is shared publicly **for portfolio/review purposes**.
+Not open source — please don't reuse or republish it.
