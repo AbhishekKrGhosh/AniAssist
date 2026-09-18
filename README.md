@@ -6,10 +6,9 @@ AniAssist is a community-driven Android app designed to help people report injur
 
 Built as an end-to-end Android project using Kotlin and Jetpack Compose, AniAssist covers UI development, application architecture, Firebase integration, location services, camera workflows, image processing, account management, safety features, and Google Play deployment.
 
+<h2 align="center">📱 <a href="https://play.google.com/store/apps/details?id=abhishek.aniassist">Live on Google Play</a></h2>
+
 <p align="center">
-  <a href="https://play.google.com/store/apps/details?id=abhishek.aniassist">
-    <img src="https://img.shields.io/badge/Google%20Play-Live-34A853?style=for-the-badge&logo=google-play" />
-  </a>
   <img src="https://img.shields.io/badge/Kotlin-Android-7F52FF?style=for-the-badge&logo=kotlin" />
   <img src="https://img.shields.io/badge/Jetpack%20Compose-UI-4285F4?style=for-the-badge&logo=jetpackcompose" />
   <img src="https://img.shields.io/badge/Firebase-Backend-FFCA28?style=for-the-badge&logo=firebase" />
@@ -279,25 +278,7 @@ Configure the required Firebase and Google Maps credentials before running the a
 
 ---
 
-# 📲 Google Play
-
-AniAssist is available on Google Play.
-
-<p align="center">
-  <a href="https://play.google.com/store/apps/details?id=abhishek.aniassist">
-    <img src="https://img.shields.io/badge/Download%20AniAssist-Google%20Play-34A853?style=for-the-badge&logo=google-play" />
-  </a>
-</p>
-
----
-
-# 📌 Project Status
-
-AniAssist is currently published on Google Play and actively maintained.
-
-The repository is shared publicly for portfolio and technical review purposes.
-
-**This project is not open source. Please do not reuse or republish the source code without permission.**
+_Shared publicly for portfolio and technical review. Not open source — please don't reuse or republish without permission._
 
 ---
 
