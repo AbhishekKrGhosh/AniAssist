@@ -92,23 +92,23 @@ The application includes:
 
 AniAssist is a native Android application built with Kotlin and Jetpack Compose.
 
-| Area | Technology |
-|---|---|
-| Language | Kotlin |
-| UI | Jetpack Compose |
-| Design System | Material 3 |
-| Navigation | Compose Navigation |
-| Architecture | ViewModel + Repository |
-| Authentication | Firebase Authentication |
-| Database | Firebase Realtime Database |
-| Local Preferences | DataStore |
-| Maps | Google Maps Compose |
-| Location | Google Location APIs + Geocoder |
-| Camera | CameraX |
-| Image Loading | Coil 3 |
-| Image Cropping | uCrop |
-| Animations | Lottie |
-| Release Optimization | R8 / ProGuard |
+| Area                 | Technology                      |
+| -------------------- | ------------------------------- |
+| Language             | Kotlin                          |
+| UI                   | Jetpack Compose                 |
+| Design System        | Material 3                      |
+| Navigation           | Compose Navigation              |
+| Architecture         | ViewModel + Repository          |
+| Authentication       | Firebase Authentication         |
+| Database             | Firebase Realtime Database      |
+| Local Preferences    | DataStore                       |
+| Maps                 | Google Maps Compose             |
+| Location             | Google Location APIs + Geocoder |
+| Camera               | CameraX                         |
+| Image Loading        | Coil 3                          |
+| Image Cropping       | uCrop                           |
+| Animations           | Lottie                          |
+| Release Optimization | R8 / ProGuard                   |
 
 ---
 
@@ -139,7 +139,7 @@ The application follows a layered structure separating UI, navigation, state man
           ┌─────────────────┐    ┌──────────────────┐
           │ Firebase Auth   │    │ Realtime Database │
           └─────────────────┘    └──────────────────┘
-````
+```
 
 Additional Android integrations are handled directly through the UI/application layers:
 
@@ -185,9 +185,9 @@ This was a deliberate architectural choice to avoid using Firebase Storage for t
 
 CameraX provides in-app image capture with context-specific camera selection.
 
-* Rear camera for animal reports
-* Front camera for profile selfies
-* Gallery selection as an alternative
+- Rear camera for animal reports
+- Front camera for profile selfies
+- Gallery selection as an alternative
 
 The camera workflow is integrated directly into the Compose application.
 
@@ -197,12 +197,12 @@ The camera workflow is integrated directly into the Compose application.
 
 Location functionality combines:
 
-* Google Maps Compose
-* Google location APIs
-* Geocoder
-* Reverse geocoding
-* Map pin selection
-* Google Maps navigation intents
+- Google Maps Compose
+- Google location APIs
+- Geocoder
+- Reverse geocoding
+- Map pin selection
+- Google Maps navigation intents
 
 This allows reports to store both geographic coordinates and readable location information.
 
@@ -212,12 +212,12 @@ This allows reports to store both geographic coordinates and readable location i
 
 The application uses:
 
-* CameraX for image capture
-* Coil 3 for image loading
-* uCrop for profile image cropping
-* Client-side image resizing
-* JPEG compression
-* Base64 encoding
+- CameraX for image capture
+- Coil 3 for image loading
+- uCrop for profile image cropping
+- Client-side image resizing
+- JPEG compression
+- Base64 encoding
 
 This reduces the size of images before they are written to the database.
 
@@ -229,13 +229,13 @@ AniAssist uses Firebase Authentication for email/password authentication and Fir
 
 Security considerations include:
 
-* Authenticated database access
-* Firebase Realtime Database security rules
-* Environment-based configuration
-* No committed signing credentials
-* No sensitive configuration committed to the repository
-* R8/ProGuard release optimization
-* Firebase model keep rules for release builds
+- Authenticated database access
+- Firebase Realtime Database security rules
+- Environment-based configuration
+- No committed signing credentials
+- No sensitive configuration committed to the repository
+- R8/ProGuard release optimization
+- Firebase model keep rules for release builds
 
 API keys, database configuration, and signing credentials are injected through build configuration rather than committed directly to the repository.
 
@@ -245,14 +245,14 @@ API keys, database configuration, and signing credentials are injected through b
 
 The project also includes production-oriented Android practices such as:
 
-* Release builds with R8/ProGuard
-* Firebase model keep rules
-* Client-side image optimization
-* Reusable Compose components
-* Centralized application state
-* Persistent local preferences using DataStore
-* Environment-based configuration
-* Google Play production deployment
+- Release builds with R8/ProGuard
+- Firebase model keep rules
+- Client-side image optimization
+- Reusable Compose components
+- Centralized application state
+- Persistent local preferences using DataStore
+- Environment-based configuration
+- Google Play production deployment
 
 ---
 
@@ -260,11 +260,11 @@ The project also includes production-oriented Android practices such as:
 
 ## Requirements
 
-* Android Studio
-* JDK
-* Android SDK
-* Firebase project
-* Google Maps API configuration
+- Android Studio
+- JDK
+- Android SDK
+- Firebase project
+- Google Maps API configuration
 
 ## Clone the repository
 
@@ -307,12 +307,11 @@ The repository is shared publicly for portfolio and technical review purposes.
 
 Android / React Native Developer
 
-* GitHub: [https://github.com/AbhishekKrGhosh](https://github.com/AbhishekKrGhosh)
-* LinkedIn: [https://linkedin.com/in/abhishek-ghosh-dev](https://linkedin.com/in/abhishek-ghosh-dev)
+- GitHub: [https://github.com/AbhishekKrGhosh](https://github.com/AbhishekKrGhosh)
+- LinkedIn: [https://linkedin.com/in/abhishek-ghosh-dev](https://linkedin.com/in/abhishek-ghosh-dev)
 
 ---
 
 <p align="center">
   🐾 <strong>Because every life matters.</strong>
 </p>
-
