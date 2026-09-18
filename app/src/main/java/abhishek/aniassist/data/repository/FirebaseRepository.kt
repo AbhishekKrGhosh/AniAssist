@@ -27,7 +27,7 @@ object FirebaseRepository {
 
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseDatabase
-        .getInstance("https://aniassist-7cef4-default-rtdb.firebaseio.com").reference
+        .getInstance(abhishek.aniassist.BuildConfig.FIREBASE_DB_URL).reference
 
     // ─── Auth ─────────────────────────────────────────────────────────────────
 

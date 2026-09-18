@@ -15,6 +15,7 @@ val mapsApiKey: String = envProps.getProperty("MAPS_API_KEY", "")
 val uploadStorePassword: String = envProps.getProperty("KEYSTORE_PASSWORD", "")
 val uploadKeyAlias: String = envProps.getProperty("KEY_ALIAS", "upload")
 val uploadKeyPassword: String = envProps.getProperty("KEY_PASSWORD", "")
+val firebaseDbUrl: String = envProps.getProperty("FIREBASE_DB_URL", "")
 
 android {
     namespace = "abhishek.aniassist"
@@ -34,6 +35,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
+        buildConfigField("String", "FIREBASE_DB_URL", "\"$firebaseDbUrl\"")
     }
 
     signingConfigs {
@@ -67,6 +69,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
